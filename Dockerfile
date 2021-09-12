@@ -1,4 +1,5 @@
-FROM nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.4.1-cudnn8-runtime-ubuntu20.04
+# FROM nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,6 +15,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER appuser
 ENV HOME=/home/appuser
 WORKDIR $HOME
+
 # install faceblur dependencies 
 RUN git clone https://github.com/rigolepe/Pytorch_faceblur && \
     cd Pytorch_faceblur && \
@@ -23,8 +25,6 @@ ENV PYTHONPATH=$HOME/Pytorch_faceblur/:$PYTHONPATH
 # the docker image must be self-contained, so we have to copy the large weights file into it
 COPY Resnet50_Final.pth /weights/
 COPY videoblur.sh /bin/
-# ENV PATH=$HOME/bin/:$PATH
-
 
 WORKDIR /work
 RUN sudo chmod -R 777 /work
@@ -32,7 +32,7 @@ ENV PYTHONPATH=/work/:$PYTHONPATH
 
 ENV FVCORE_CACHE="/tmp"
 
-# test the setup and let RetinaFace download the default model file into the image 
-RUN videoblur.sh --load_model_only --input_file dummy.mp4 --output_file dummy.mp4 --blur_strength 0.4
+# let RetinaFace download the default model file into the docker image 
+RUN videoblur.sh --load_model_only --input_file dummy.mp4 --output_file dummy.mp4 --cpu --blur_strength 0.4
 
 CMD ["bash"]
