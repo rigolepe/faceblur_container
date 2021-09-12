@@ -16,6 +16,8 @@ Run the `docker-build.sh` script. Building the image may take a while the first 
 `docker run -it --rm -v $(pwd):/work faceblur videoblur.sh --input_file video.mp4 --output_file video_blur.mp4 --cpu --blur_strength 0.4 `
 
 This will mount your working folder `pwd` to the docker image and process the given video file, located relatively to your working folder. 
+The blur strength usually ranges from 0.3 (not very blurred), to 0.4 (average blur), to 0.6 (a lot of blur), though any number beteen 
+0.0 and 1.0 can be used. 
 
 Check that the exit code is zero to make sure the algorithm finished sucessfully: 
 
