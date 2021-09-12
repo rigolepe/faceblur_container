@@ -2,7 +2,7 @@
 
 This faceblur container repository makes it easy to build a fully contained docker image for applying a face blur on video files. 
 It uses the [RetinaFace](https://github.com/biubug6/Pytorch_Retinaface) neural network in the backend. The repository is based on the 
-[Pytorch_faceblur](https://github.com/rahuja123/Pytorch_faceblur) code.
+[Pytorch_faceblur](https://github.com/rigolepe/Pytorch_faceblur) code.
 
 ## Building the image
 
@@ -29,7 +29,7 @@ fi
 exit $retVal
 ```
 
-You may want to re-encode the resulting video with:
+You may want to re-encode the resulting video to compress it or change the codec, using:
 
 `docker run -it --rm -v $(pwd):/work faceblur ffmpeg -i video_blur.mp4 -vcodec libx264 -crf 23 video_blur_enc.mp4`
 
