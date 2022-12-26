@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/l4t-pytorch:r35.1.0-pth1.13-py3
+FROM nvcr.io/nvidia/l4t-pytorch:r34.1.1-pth1.12-py3
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
