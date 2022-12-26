@@ -1,5 +1,5 @@
-# FROM nvcr.io/nvidia/l4t-pytorch:r34.1.1-pth1.12-py3
-FROM nvidia/cuda:11.4.1-runtime-ubuntu20.04
+FROM nvcr.io/nvidia/l4t-pytorch:r34.1.1-pth1.12-py3
+# FROM nvidia/cuda:11.4.1-runtime-ubuntu20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -19,7 +19,7 @@ WORKDIR $HOME
 # install faceblur dependencies 
 RUN git clone https://github.com/rigolepe/Pytorch_faceblur && \
     cd Pytorch_faceblur && \
-    pip3 install --user --no-deps -r requirements.txt && \
+    pip3 install --user --no-deps -r requirements-jetpack.txt && \
     cd ..
 ENV PYTHONPATH=$HOME/Pytorch_faceblur/:$PYTHONPATH
 # the docker image must be self-contained, so we have to copy the large weights file into it
