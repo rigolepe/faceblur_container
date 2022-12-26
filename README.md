@@ -9,11 +9,11 @@ It uses the [RetinaFace](https://github.com/biubug6/Pytorch_Retinaface) neural n
 Download the [trained weights](https://www.kaggle.com/keremt/retina-face/version/3) file `Resnet50_Final.pth` from Kaggle and place 
 it in the top folder of this repository. 
 
-Run the `docker-build.sh` script. Building the image may take a while the first time because the base images need to be downloaded as well (about 1.6GB).
+Run the `docker-build.sh` script. Building the image may take a while the first time because the base images need to be downloaded as well.
 
 ## Running the container
 
-`docker run -it --rm -v $(pwd):/work faceblur videoblur.sh --input_file video.mp4 --output_file video_blur.mp4 --cpu --blur_strength 0.4 `
+`docker run -it --rm -v $(pwd):/work faceblur videoblur.sh --input_file video.mp4 --output_file video_blur.mp4 --cpu --blur_strength 0.8 `
 
 This will mount your working folder `pwd` to the docker image and process the given video file, located relatively to your working folder. 
 The blur strength usually ranges from 0.3 (not very blurred), to 0.4 (average blur), to 0.6 (a lot of blur), though any number beteen 
