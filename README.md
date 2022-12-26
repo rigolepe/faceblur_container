@@ -19,11 +19,6 @@ With GPU support:
 
 `docker run --gpus all -it --rm -v $(pwd):/work faceblur videoblur.sh --input_file video.mp4 --output_file video_blur.mp4 --blur_strength 0.8`
 
-On the Jetson under jetpack 5.x, add your user to the `video` group to avoid an error with `NvRmMemInitNvmap`.
-
-`sudo usermod -a -G video peter`
-`sudo usermod -a -G i2c peter`
-
 Remove the `-it` to run it in daemon mode (without interaction).
 
 This will mount your working folder `pwd` to the docker image and process the given video file, located relatively to your working folder. 

@@ -8,20 +8,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN ln -sv /usr/bin/python3 /usr/bin/python && \
     pip3 install --upgrade pip 
 
-# create a non-root user
-ARG USER_ID=1000
-RUN useradd -m --no-log-init --system  --uid ${USER_ID} appuser -g sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-USER appuser
-ENV HOME=/home/appuser
-WORKDIR $HOME
-
 # install faceblur dependencies 
+WORKDIR /app
 RUN git clone https://github.com/rigolepe/Pytorch_faceblur && \
     cd Pytorch_faceblur && \
     pip3 install --user --no-deps -r requirements.txt && \
     cd ..
-ENV PYTHONPATH=$HOME/Pytorch_faceblur/:$PYTHONPATH
+ENV PYTHONPATH=/app/Pytorch_faceblur/:$PYTHONPATH
 # the docker image must be self-contained, so we have to copy the large weights file into it
 COPY Resnet50_Final.pth /weights/
 COPY videoblur.sh /bin/
