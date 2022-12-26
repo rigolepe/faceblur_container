@@ -13,4 +13,4 @@ image_name="faceblur"
 
 docker rmi -f "$image_name"
 
-docker build -f Dockerfile -t "$image_name" .
+docker build -f Dockerfile.arm64 -t "$image_name" .
